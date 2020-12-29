@@ -13,7 +13,8 @@ import com.taxfiling.repository.EmployerRepository;
 import com.taxfiling.repository.RepresentativeRepository;
 
 @Service
-public class RegistrationServiceImpl implements RegistrationService {
+public class LoginServiceImpl implements LoginService{
+
 	@Autowired
 	CustomerRepository customerRepo;
 	@Autowired
@@ -22,35 +23,24 @@ public class RegistrationServiceImpl implements RegistrationService {
 	RepresentativeRepository repRepo;
 	@Autowired
 	AdminRepository adminRepo;
-
-	public int registerCustomer(Customer c) {
-		System.out.println("cname:" + c.getName());
-		customerRepo.save(c);
-		return 1;
-	}
-
-	public int registerEmployer(Employer e) {
-		employerRepo.save(e);
-		return 1;
-	}
-
-	public int registerRepresentative(Representative r) {
-		repRepo.save(r);
-		return 1;
-	}
-
-	public int registerAdmin(Admin a) {
-		adminRepo.save(a);
-		return 1;
+	
+	@Override
+	public Customer loginCustomer(Long customerId,String password) {
+		return customerRepo.loginCustomer(customerId,password);
 	}
 
 	@Override
-	public Employer findEmployerByOrg(String newOrgName) {
-		return employerRepo.findEmployer(newOrgName);
+	public Employer loginEmployer(long id, String password) {
+		return employerRepo.loginEmployer(id,password);
 	}
 
 	@Override
-	public Admin findAdmin(String id) {
-		return adminRepo.findById(id).orElse(null);
+	public Representative loginRepresentative(long id, String password) {
+		return repRepo.loginRepresentative(id,password);
+	}
+
+	@Override
+	public Admin loginAdmin(String id, String password) {
+		return adminRepo.loginAdmin(id,password);
 	}
 }

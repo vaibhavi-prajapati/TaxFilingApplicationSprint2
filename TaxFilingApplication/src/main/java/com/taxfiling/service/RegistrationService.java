@@ -6,8 +6,10 @@ import com.taxfiling.entity.Employer;
 import com.taxfiling.entity.Representative;
 
 public interface RegistrationService {
-	public int registercustomer(Customer c);
+	public int registerCustomer(Customer c);
 	public int registerEmployer(Employer e);
 	public int registerRepresentative(Representative r);
 	public int registerAdmin(Admin a);
+	Admin findAdmin(String id);
+	Employer findEmployerByOrg(String newOrgName);
 }

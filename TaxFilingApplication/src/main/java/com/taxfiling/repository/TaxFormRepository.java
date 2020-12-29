@@ -5,11 +5,13 @@ import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.taxfiling.entity.TaxForm;
 
 @Transactional
-public interface TaxFormRepository extends JpaRepository<TaxForm, Long>{
+@Repository
+public interface TaxFormRepository extends JpaRepository<TaxForm, Long> {
 
 	@Modifying
 	@Query("update TaxForm tf set tf.verifiedStatus='approvePending' where tf=:t")
@@ -17,4 +19,8 @@ public interface TaxFormRepository extends JpaRepository<TaxForm, Long>{
 
 	@Query("SELECT t FROM TaxForm t where t.pan=:pan")
 	TaxForm getTaxFormByPan(String pan);
+
+	@Modifying
+	@Query("update TaxForm t set t.verifiedStatus=:status where t.taxformId=:taxformId")
+	int updateTaxForm(long taxformId, String status);
 }

@@ -1,7 +1,5 @@
 package com.taxfiling.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,28 +9,26 @@ import com.taxfiling.repository.CustomerRepository;
 import com.taxfiling.repository.TaxFormRepository;
 
 @Service
-public class FileReturnServiceImpl implements FileReturnService{
+public class FileReturnServiceImpl implements FileReturnService {
 
 	@Autowired
-	private TaxFormRepository tr;
-	
+	private TaxFormRepository taxformRepo;
+
 	@Autowired
-	private CustomerRepository cr;
-	
+	private CustomerRepository customerRepo;
+
 	@Override
 	public int fileReturn(TaxForm t) {
-		return tr.fileReturn(t);
+		return taxformRepo.fileReturn(t);
 	}
 
 	@Override
 	public TaxForm getTaxFromByPan(String pan) {
-		System.out.println("pan:"+pan);
-		return tr.getTaxFormByPan(pan);
+		return taxformRepo.getTaxFormByPan(pan);
 	}
 
 	@Override
 	public Customer getCustomerById(Long id) {
-		
-		return cr.findById(id).orElse(null);
+		return customerRepo.findById(id).orElse(null);
 	}
 }
