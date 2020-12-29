@@ -81,6 +81,7 @@ public class NoticeHandlerController {
 			i1 = ns.updateTaxForm(t.getTaxformId(), "rejected_a");
 		else if (n.getNoticeBody().equals("Your Application is Approved."))
 			i1 = ns.updateTaxForm(t.getTaxformId(), "approved");
+		System.out.println(i1);
 		return str;
 	}
 }
